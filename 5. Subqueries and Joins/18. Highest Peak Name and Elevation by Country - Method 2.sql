@@ -1,5 +1,3 @@
- -- Method 2
-
   SELECT
  TOP (5) [CountryName]
       AS [Country],
@@ -9,12 +7,12 @@
       AS [Highest Peak Elevation],
 	     ISNULL([MountainRange], '(no mountain)')
       AS [Mountain]
-    FROM (                              --Вложено QUERY
+    FROM (                              
 	         SELECT [c].[CountryName],
                     [p].[PeakName],
           		    [p].[Elevation],
           		    [m].[MountainRange],
-          		    DENSE_RANK() OVER(PARTITION BY [c].[CountryName] ORDER BY [p].[Elevation] DESC) --Записи, които се повтарят, допълнителна колона
+          		    DENSE_RANK() OVER(PARTITION BY [c].[CountryName] ORDER BY [p].[Elevation] DESC) 
                  AS [PeakRank]
                FROM [Countries]
                  AS [c]
@@ -24,7 +22,7 @@
           LEFT JOIN [Mountains]
                  AS [m]
           	     ON [mc].[MountainId] = [m].[Id]
-          LEFT JOIN [Peaks] --Навсякъде LEFT JOIN за да не загубим данните !!!!!
+          LEFT JOIN [Peaks] 
                  AS [p]
           	     ON [p].[MountainId] = [m].[Id]
          ) 
