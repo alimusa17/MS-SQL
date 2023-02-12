@@ -11,7 +11,7 @@ CREATE PROCEDURE [usp_GetEmployeesFromTown] @townName VARCHAR(50)
 			 INNER JOIN	[Towns]
 			         AS [t]
 					 ON [a].[TownID] = [t].[TownID]
-                  WHERE [t].[Name] = 'Sofia'          
+                  WHERE [t].[Name] = @townName          
 		     END
 
 EXEC [dbo].[usp_GetEmployeesFromTown] 'Sofia'
